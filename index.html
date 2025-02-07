@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h1 class="header_text">I'm truly Sorry（*＾-＾*）</h1>
+        <h2 class="header_text1">"I hope you can forgive me"</h2>
+      </div>
+      <p>
+        <a href="https://www.instagram.com/faizanwebd?igsh=YzQzbHhrZ3kzNzA1">@faizanwebd</a>
+      </p>
+      <div class="gif_container">
+        <img
+          src="https://i.postimg.cc/pdNqPxx1/milk-and-mocha-cute.gif"
+          alt="Cute animated illustration"
+        />
+      </div>
+      <div class="buttons">
+        <button class="btn" id="yesButton" onclick="playAnotherSongAndOpenNewTab()">Yes</button>
+        <button
+          class="btn"
+          id="noButton"
+          onmouseover="moveButton()"
+          onclick="moveButton()"
+        >
+          No
+        </button>
+
+        <audio id="myAudio" preload="auto" autoplay></audio>
+
+        <script>
+          // Set the audio source to "do din.mp3" for page load
+          document.getElementById('myAudio').src = 'do din.mp3';
+          document.getElementById('myAudio').play();
+
+          function playAnotherSongAndOpenNewTab() {
+            // Set the audio source to "song.mp3" when the "Yes" button is pressed
+            document.getElementById('myAudio').src = 'song.mp3';
+            document.getElementById('myAudio').play();
+            // Open the next page in a new tab
+            window.open('yes.html');
+          }
+
+          function moveButton() {
+            var x =
+              Math.random() *
+              (window.innerWidth - document.getElementById("noButton").offsetWidth);
+            var y =
+              Math.random() *
+              (window.innerHeight - document.getElementById("noButton").offsetHeight);
+            document.getElementById("noButton").style.left = `${x}px`;
+            document.getElementById("noButton").style.top = `${y}px`;
+          }
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
