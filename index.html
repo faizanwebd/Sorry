@@ -1,61 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorry Message</title>
     <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div>
-        <h1 class="header_text">I'm truly Sorry（*＾-＾*）</h1>
-        <h2 class="header_text1">"I hope you can forgive me"</h2>
-      </div>
-      <p>
-        <a href="https://www.instagram.com/faizanwebd?igsh=YzQzbHhrZ3kzNzA1">@faizanwebd</a>
-      </p>
-      <div class="gif_container">
-        <img
-          src="https://i.postimg.cc/pdNqPxx1/milk-and-mocha-cute.gif"
-          alt="Cute animated illustration"
-        />
-      </div>
-      <div class="buttons">
-        <button class="btn" id="yesButton" onclick="playAnotherSongAndOpenNewTab()">Yes</button>
-        <button
-          class="btn"
-          id="noButton"
-          onmouseover="moveButton()"
-          onclick="moveButton()"
-        >
-          No
-        </button>
+</head>
+<body>
+    <!-- Overlay for Mobile Autoplay Fix -->
+    <div id="overlay" onclick="startAudio()">
+        <h2>🎵 Tap to Start Music 🎵</h2>
+    </div>
 
-        <audio id="myAudio" preload="auto" autoplay></audio>
+    <div class="container">
+        <div>
+            <h1 class="header_text">I'm truly Sorry（*＾-＾*）</h1>
+            <h2 class="header_text1">"I hope you can forgive me"</h2>
+        </div>
+        <p>
+            <a href="https://www.instagram.com/faizanwebd?igsh=YzQzbHhrZ3kzNzA1">@faizanwebd</a>
+        </p>
+        <div class="gif_container">
+            <img src="https://i.postimg.cc/pdNqPxx1/milk-and-mocha-cute.gif" alt="Cute animated illustration" />
+        </div>
+        <div class="buttons">
+            <button class="btn" id="yesButton">Yes</button>
+            <button class="btn" id="noButton">No</button>
+        </div>
+        
+        <!-- Audio Element (Initially Muted for Autoplay) -->
+        <audio id="myAudio" autoplay muted>
+            <source src="do din.mp3" type="audio/mpeg">
+        </audio>
 
         <script>
-          // Set the audio source to "do din.mp3" for page load
-          document.getElementById('myAudio').src = 'do din.mp3';
-          document.getElementById('myAudio').play();
+            function startAudio() {
+                var audio = document.getElementById('myAudio');
+                audio.muted = false; // ✅ Unmute audio
+                audio.play().catch(error => console.log("Autoplay blocked:", error));
+                
+                // Hide overlay after tap
+                document.getElementById('overlay').style.display = 'none';
+            }
 
-          function playAnotherSongAndOpenNewTab() {
-            // Set the audio source to "song.mp3" when the "Yes" button is pressed
-            document.getElementById('myAudio').src = 'song.mp3';
-            document.getElementById('myAudio').play();
-            // Open the next page in a new tab
-            window.open('yes.html');
-          }
+            window.onload = function () {
+                var audio = document.getElementById('myAudio');
+                
+                // Desktop browsers autoplay fix
+                audio.muted = false;
+                audio.play().catch(() => {
+                    console.log("Autoplay blocked, showing overlay.");
+                    document.getElementById('overlay').style.display = 'flex';
+                });
+            };
 
-          function moveButton() {
-            var x =
-              Math.random() *
-              (window.innerWidth - document.getElementById("noButton").offsetWidth);
-            var y =
-              Math.random() *
-              (window.innerHeight - document.getElementById("noButton").offsetHeight);
-            document.getElementById("noButton").style.left = `${x}px`;
-            document.getElementById("noButton").style.top = `${y}px`;
-          }
+            // "Yes" button: Play another song and open a new page
+            document.getElementById('yesButton').addEventListener('click', function () {
+                var audio = document.getElementById('myAudio');
+                audio.src = 'song.mp3'; // Change song
+                audio.play();
+                window.open('yes.html', '_blank');
+            });
+
+            // "No" button: Move randomly on hover
+            document.getElementById('noButton').addEventListener('mouseover', function () {
+                var x = Math.random() * (window.innerWidth - this.offsetWidth);
+                var y = Math.random() * (window.innerHeight - this.offsetHeight);
+                this.style.position = "absolute";
+                this.style.left = `${x}px`;
+                this.style.top = `${y}px`;
+            });
         </script>
-      </div>
+
+        <!-- Mobile Overlay CSS -->
+        <style>
+            #overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                font-size: 24px;
+                cursor: pointer;
+            }
+        </style>
     </div>
-  </body>
+</body>
 </html>
