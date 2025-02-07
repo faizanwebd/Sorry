@@ -21,7 +21,7 @@ body {
 
 .header_text {
   font-family: "Nunito";
-  font-size: 50px;
+  font-size: 55px;
   font-weight: bold;
   text-align: center;
   margin-top: 20px;
@@ -30,7 +30,7 @@ body {
 }
 .header_text1 {
   font-family: "Nunito";
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
   text-align: center;
   margin-top: 20px;
@@ -93,5 +93,5 @@ p a {
   color: rgb(255, 255, 255);
   font-size: 20px;
   font-weight: 600;
-  opacity: 0.25;
+  opacity: 0.5;
 }
